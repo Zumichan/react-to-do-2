@@ -4,8 +4,15 @@ import React, { Component } from 'react';
    render() {
      return (
        <li>
-       <input type="checkbox" checked={ this.props.isCompleted } onChange={ this.props.toggleComplete } />
-       <span>{this.props.description}</span>
+       <input
+         type="checkbox"
+         checked={ this.props.isCompleted }
+         onChange={ this.props.toggleComplete }
+        />
+       <span>
+         { this.props.description }
+         <button className="btn btn-delete" onClick={ this.props.deleteTodo }>Delete</button>
+       </span>
      </li>
    );
  }

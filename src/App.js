@@ -33,18 +33,31 @@ class App extends Component {
     this.setState({ todos: todos });
   }
 
+   deleteTodo(index) {
+     this.setState({ todos : this.state.todos.filter((todo, deleteIndex)=>index !== deleteIndex)})
+   }
+
   render() {
     return (
       <div className="App">
+        <div className="todo-border">
+        <h1>React Todos</h1>
         <ul>
         { this.state.todos.map( (todo, index) =>
-            <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } />
+            <ToDo
+              key={ index }
+              description={ todo.description }
+              isCompleted={ todo.isCompleted }
+              toggleComplete={ () => this.toggleComplete(index) }
+              deleteTodo={ () => this.deleteTodo(index) }
+            />
           )}
         </ul>
         <form onSubmit={ (e) => this.handleSubmit(e) }>
-           <input type="text" value={ this.state.newTodoDescription } onChange={ (e) => this.handleChange(e) } />
-           <input type="submit" />
-         </form>
+           <input type="text" value={ this.state.newTodoDescription } onChange={ (e) => this.handleChange(e) } deleteTodo={this.deleteTodo}/>
+           <input type="submit" className="btn btn-submit"/>
+        </form>
+        </div>
       </div>
     );
   }
